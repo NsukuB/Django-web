@@ -1,0 +1,30 @@
+
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome to the Home Page!</h1>
+        <p class="lead">This is the home page of the application.</p>
+
+        {% block content %}
+            {% if user.is_authenticated %}
+                <p class="lead">Hi, <strong>{{ user.username }}</strong>!</p>
+                <a href="{% url 'polls:index' %}" class="btn btn-primary">Go to Polls</a>
+                <form action="{% url 'logout' %}" method="post" class="logout-form mt-3">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Log Out</button>
+                </form>
+            {% else %}
+                <p class="lead">You are not logged in.</p>
+                <a href="{% url 'login' %}" class="btn btn-secondary login-link">Log In</a>
+            {% endif %}
+        {% endblock %}
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
